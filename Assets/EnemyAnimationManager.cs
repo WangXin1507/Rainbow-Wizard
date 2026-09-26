@@ -26,6 +26,15 @@ public class EnemyAnimationManager : MonoBehaviour
     {
         AnimSpeed = Mathf.Lerp(maxAnimSpeed, minAnimSpeed, enemyWeight);
         animator.speed = AnimSpeed;
-        Debug.Log("AnimSpeed: " + AnimSpeed + "\nanimator.speed: " + animator.speed);
+    }
+
+    public void TriggerHitStunAnim()
+    {
+        animator.SetTrigger("Damaged");
+    }
+
+    public void TriggerDeathAnim()
+    {
+        animator.SetTrigger("Dead");
     }
 }

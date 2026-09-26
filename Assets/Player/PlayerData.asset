@@ -15,13 +15,13 @@ MonoBehaviour:
   health: 100
   fireInterval: 0.1
   impactDamage: 40
-  initialSpeed: 50
+  initialSpeed: 75
   targetSpeed: 10
   maxColliderScale: 1.2
   timeToReachTargetSpeed: 7
   paintCost: 15
   expirationTimer: 5
   capacity: 100
-  rechargeDelay: 0.4
+  rechargeDelay: 1
   rechargeSpeed: 15
   exhaustTimeOut: 1

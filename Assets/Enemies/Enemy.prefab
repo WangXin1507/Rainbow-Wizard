@@ -464,6 +464,7 @@ GameObject:
   - component: {fileID: 4285532487591775838}
   - component: {fileID: 343206027188986822}
   - component: {fileID: 1053676604659474176}
+  - component: {fileID: 5821926259069841233}
   - component: {fileID: 3688128735652320493}
   - component: {fileID: 463737240635990289}
   m_Layer: 7
@@ -528,7 +529,7 @@ MonoBehaviour:
   enemyHealth: {fileID: 8988412290523173993}
   spriteColorer: {fileID: 8559186942302713957}
   enemyMovement: {fileID: 4285532487591775838}
-  animationManager: {fileID: 0}
+  animationManager: {fileID: 343206027188986822}
   color: 0
   enemyWeight: -1
   isInitialized: 0
@@ -546,10 +547,85 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnEnemyDamageTaken:
     m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 343206027188986822}
+        m_TargetAssemblyTypeName: EnemyAnimationManager, Assembly-CSharp
+        m_MethodName: TriggerHitStunAnim
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4285532487591775838}
+        m_TargetAssemblyTypeName: EnemyMovement, Assembly-CSharp
+        m_MethodName: TriggerHitStunSlow
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5821926259069841233}
+        m_TargetAssemblyTypeName: EnemyEffectsManager, Assembly-CSharp
+        m_MethodName: TriggerDamageTakenImpactEffect
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnEnemyDamageIgnored:
+    m_PersistentCalls:
       m_Calls: []
   OnEnemyDeath:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 343206027188986822}
+        m_TargetAssemblyTypeName: EnemyAnimationManager, Assembly-CSharp
+        m_MethodName: TriggerDeathAnim
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4285532487591775838}
+        m_TargetAssemblyTypeName: EnemyMovement, Assembly-CSharp
+        m_MethodName: StopMoving
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5821926259069841233}
+        m_TargetAssemblyTypeName: EnemyEffectsManager, Assembly-CSharp
+        m_MethodName: TriggerBigDamageTakenImpactEffect
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   minMaxHealth: 90
   maxMaxHealth: 150
 --- !u!114 &8559186942302713957
@@ -583,6 +659,7 @@ MonoBehaviour:
   targetPosition: {x: 0, y: 0, z: 0}
   minMoveSpeed: 0.9
   maxMoveSpeed: 1.5
+  hitStunSlowMultiplier: 0.7
 --- !u!114 &343206027188986822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -613,6 +690,19 @@ MonoBehaviour:
   enemyCollider: {fileID: 0}
   minScale: 0.9
   maxScale: 1.5
+--- !u!114 &5821926259069841233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6059941950022540815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d4fc8ec8ed5c594fbae4889a57cd42d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageTakenImpactEffect: {fileID: 4818176860016902301, guid: 1d6f3b85b88f9a248a4c09e88c497292, type: 3}
 --- !u!114 &3688128735652320493
 MonoBehaviour:
   m_ObjectHideFlags: 0
