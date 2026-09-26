@@ -14,6 +14,10 @@ public class Enemy : MonoBehaviour
     void Awake()
     {
         enemyHealth = GetComponent<EnemyHealth>();
+    }
+
+    private void Start()
+    {
         if (color != PaintColor.NONE)
         {
             enemyHealth.InitializeHealth(color);
