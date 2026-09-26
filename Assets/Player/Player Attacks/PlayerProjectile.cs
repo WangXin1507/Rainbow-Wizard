@@ -6,8 +6,7 @@ using UnityEngine;
 public class PlayerProjectile : MonoBehaviour
 {
     public PlayerData playerData;
-
-    PaintResource paintResource;
+    [HideInInspector] public PaintResource paintResource;
     SpriteRenderer sr;
     Rigidbody2D rb;
     CircleCollider2D col;
@@ -58,7 +57,8 @@ public class PlayerProjectile : MonoBehaviour
         if (collision.TryGetComponent(out EnemyHealth health))
         {
             health.Damage(playerData.impactDamage, paintResource.paintColor);
-        }    
+            Destroy(gameObject);
+        }
     }
 
     void Awake()

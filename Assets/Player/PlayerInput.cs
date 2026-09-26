@@ -4,7 +4,6 @@ using UnityEngine.InputSystem;
 
 /// <summary>
 /// Reads A/S/D (including two-key combos), mouse, and Escape through Input Actions.
-/// Assign PlayerInputActions, or a default map is created at runtime.
 /// </summary>
 [DefaultExecutionOrder(-1000)]
 public class PlayerInput : MonoBehaviour
@@ -137,11 +136,11 @@ public class PlayerInput : MonoBehaviour
         MouseScroll = scrollAction.ReadValue<Vector2>();
         MouseWorldPosition = ScreenToWorld(MousePosition);
 
-        LeftMouse = leftClickAction.IsPressed();
-        RightMouse = rightClickAction.IsPressed();
+        LeftMouse = leftClickAction.IsInProgress();
+        RightMouse = rightClickAction.IsInProgress();
         MiddleMouse = middleClickAction.IsPressed();
-        LeftMousePressed = leftClickAction.WasPressedThisFrame();
-        RightMousePressed = rightClickAction.WasPressedThisFrame();
+        LeftMousePressed = leftClickAction.IsInProgress();
+        RightMousePressed = rightClickAction.IsInProgress();
         MiddleMousePressed = middleClickAction.WasPressedThisFrame();
 
         if (LeftMousePressed) OnLeftClick?.Invoke(MouseWorldPosition);
