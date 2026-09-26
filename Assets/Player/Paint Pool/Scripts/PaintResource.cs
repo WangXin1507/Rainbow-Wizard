@@ -37,7 +37,7 @@ namespace PlayerPaint
             OnPaintResourceChange?.Invoke(this, reserve / capacity);
         }
 
-        public void OnAwake(float capacity, float rechargeDelay, float rechargeSpeed, float exhaustTimeOut)
+        public virtual void OnAwake(float capacity, float rechargeDelay, float rechargeSpeed, float exhaustTimeOut)
         {
             this.capacity = capacity;
             this.rechargeDelay = rechargeDelay;
@@ -49,7 +49,7 @@ namespace PlayerPaint
             Player.PlayerFire.OnPlayerFiresProjectile.AddListener(RefreshRechargeDelay);
         }
 
-        public void OnUpdate(float deltaT)
+        public virtual void OnUpdate(float deltaT)
         {
             exhaustTimer -= deltaT;
             rechargeTimer -= deltaT;
@@ -60,9 +60,9 @@ namespace PlayerPaint
             }
         }
 
-        public void RefreshRechargeDelay(GameObject bullet)
+        public virtual void RefreshRechargeDelay(PaintResource resource)
         {
-            if (Player.PaintPool.ActivePaint == this)
+            if (resource == this)
             {
                 rechargeTimer = rechargeDelay;
             }

@@ -8,7 +8,7 @@ namespace PlayerPaint
         public PlayerData playerData;
         public GameObject bullet;
 
-        public UnityEvent<GameObject> OnPlayerFiresProjectile;
+        public UnityEvent<PaintResource> OnPlayerFiresProjectile;
 
         Vector2 playerPos;
         float lastFiredTime;
@@ -37,7 +37,7 @@ namespace PlayerPaint
             Player.PaintPool.ActivePaint.UpdatePaintReserve(-playerData.paintCost);
 
             lastFiredTime = Time.time;
-            OnPlayerFiresProjectile?.Invoke(bullet);
+            OnPlayerFiresProjectile?.Invoke(Player.PaintPool.ActivePaint);
         }
     }
 }
