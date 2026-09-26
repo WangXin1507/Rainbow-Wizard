@@ -9,6 +9,7 @@ namespace Bucket
         public Animator pourBucketAnim;
         public SpriteRenderer bucketPaintVisual;
         public SpriteRenderer pourColorVisual;
+        public GameObject splatExplosion;
         Bucket bucket;
         bool pouring;
 
@@ -29,7 +30,7 @@ namespace Bucket
             // spawn bucket anim
             pouring = true;
             Vector2 origin = Player.PlayerInput.MouseWorldPosition;
-            pourBucketAnim.transform.position = origin;
+            pourBucketAnim.transform.position = new(origin.x, origin.y + 2);
             pourBucketAnim.gameObject.SetActive(true);
             pourBucketAnim.Play(0, 0, 0);
 
@@ -46,6 +47,8 @@ namespace Bucket
             }
 
             SetPainPourColor(bucket.MajorityPaint.color);
+            Instantiate(splatExplosion, origin, transform.rotation).GetComponent<SplatExplosion>().Init(0, data.impactRadius, data.lingerDuration * 2, bucket.MajorityPaint.color);
+
             var token = this.GetCancellationTokenOnDestroy();
             await UniTask.WaitUntil(
                 () => pourBucketAnim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f,
