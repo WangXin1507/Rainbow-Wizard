@@ -31,6 +31,10 @@ namespace PlayerPaint
 
         public override void RefreshRechargeDelay(PaintResource resource)
         {
+            if (resource != this)
+            {
+                return;
+            }
             foreach (var child in childResources)
             {
                 child.RefreshRechargeDelay(child);

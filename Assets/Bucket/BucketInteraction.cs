@@ -69,7 +69,7 @@ namespace Bucket
             {
                 DamageEnemiesInRadius(origin, dps * Time.deltaTime, color);
                 elapsed += Time.deltaTime;
-                await UniTask.Yield(cancellationToken: token);
+                await UniTask.WaitForSeconds(data.lingerDamageFrequency, cancellationToken: token);
             }
         }
 
