@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -1829036294, guid: ed0247fa01a97074092580782d42afe2, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -246,3 +246,5 @@ MonoBehaviour:
   animator: {fileID: 4291514265536343800}
   spriteRenderer: {fileID: 8399980784033924907}
   bigSplatterChance: 0.2
+  splatterAngleVariance: 60
+  splatterScaleVariance: 0.6
