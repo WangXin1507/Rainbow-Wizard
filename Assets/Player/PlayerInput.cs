@@ -18,9 +18,9 @@ public class PlayerInput : MonoBehaviour
     public UnityEvent OnADPressed;
     public UnityEvent OnSDPressed;
     public UnityEvent OnEscapePressed;
-    public UnityEvent OnLeftClick;
-    public UnityEvent OnRightClick;
-    public UnityEvent OnMiddleClick;
+    public UnityEvent<Vector2> OnLeftClick;
+    public UnityEvent<Vector2> OnRightClick;
+    public UnityEvent<Vector2> OnMiddleClick;
 
     public bool A { get; private set; }
     public bool S { get; private set; }
@@ -73,11 +73,6 @@ public class PlayerInput : MonoBehaviour
         if (actions != null)
         {
             runtimeActions = actions;
-        }
-        else
-        {
-            runtimeActions = CreateDefaultActions();
-            ownsActions = true;
         }
 
         InputActionMap map = runtimeActions.FindActionMap("Player", true);
@@ -149,9 +144,9 @@ public class PlayerInput : MonoBehaviour
         RightMousePressed = rightClickAction.WasPressedThisFrame();
         MiddleMousePressed = middleClickAction.WasPressedThisFrame();
 
-        if (LeftMousePressed) OnLeftClick?.Invoke();
-        if (RightMousePressed) OnRightClick?.Invoke();
-        if (MiddleMousePressed) OnMiddleClick?.Invoke();
+        if (LeftMousePressed) OnLeftClick?.Invoke(MousePosition);
+        if (RightMousePressed) OnRightClick?.Invoke(MousePosition);
+        if (MiddleMousePressed) OnMiddleClick?.Invoke(MousePosition);
     }
 
     Vector2 ScreenToWorld(Vector2 screen)
@@ -162,31 +157,5 @@ public class PlayerInput : MonoBehaviour
             return screen;
 
         return cam.ScreenToWorldPoint(screen);
-    }
-
-    static InputActionAsset CreateDefaultActions()
-    {
-        InputActionAsset asset = ScriptableObject.CreateInstance<InputActionAsset>();
-        InputActionMap map = asset.AddActionMap("Player");
-
-        map.AddAction("A", InputActionType.Button, "<Keyboard>/a");
-        map.AddAction("S", InputActionType.Button, "<Keyboard>/s");
-        map.AddAction("D", InputActionType.Button, "<Keyboard>/d");
-        map.AddAction("Escape", InputActionType.Button, "<Keyboard>/escape");
-
-        InputAction point = map.AddAction("Point", InputActionType.Value);
-        point.AddBinding("<Mouse>/position");
-
-        InputAction delta = map.AddAction("Delta", InputActionType.Value);
-        delta.AddBinding("<Mouse>/delta");
-
-        InputAction scroll = map.AddAction("Scroll", InputActionType.Value);
-        scroll.AddBinding("<Mouse>/scroll");
-
-        map.AddAction("LeftClick", InputActionType.Button, "<Mouse>/leftButton");
-        map.AddAction("RightClick", InputActionType.Button, "<Mouse>/rightButton");
-        map.AddAction("MiddleClick", InputActionType.Button, "<Mouse>/middleButton");
-
-        return asset;
     }
 }
