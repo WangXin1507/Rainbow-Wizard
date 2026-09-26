@@ -16,11 +16,6 @@ namespace PlayerPaint
 
         public override void UpdatePaintReserve(float amt)
         {
-            if (amt > 0)
-            {
-                throw new ArgumentException("Cannot add directly to composite paint resource");
-            }
-
             foreach (var resource in childResources)
             {
                 resource.UpdatePaintReserve(amt);
