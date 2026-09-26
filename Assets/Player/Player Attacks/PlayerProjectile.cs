@@ -5,20 +5,12 @@ using UnityEngine;
 
 public class PlayerProjectile : MonoBehaviour
 {
-    [Header("Projectile Stats")]
-    public float impactDamage;
-    public float initialSpeed;
-    public float acceleration;
-    public float targetSpeed;
-    public Vector2 maxColliderScale;
-    public float timeToReachTargetSpeed;
-    [Tooltip("Time it takes to detroy bullet after reaching target speed")]
-    public float expirationTimer;
+    public PlayerData playerData;
 
     PaintResource paintResource;
     SpriteRenderer sr;
     Rigidbody2D rb;
-    BoxCollider2D col;
+    CircleCollider2D col;
 
     Vector2 direction;
     float currentSpeed;
@@ -26,19 +18,19 @@ public class PlayerProjectile : MonoBehaviour
     public void Init(Vector2 dir)
     {
         direction = dir.normalized;
-        currentSpeed = initialSpeed;
-        transform.right = direction;
+        currentSpeed = playerData.initialSpeed;
+        transform.up = direction;
         rb.linearVelocity = direction * currentSpeed;
 
-        Tween.Custom(this, initialSpeed, targetSpeed, timeToReachTargetSpeed, (proj, speed) =>
+        Tween.Custom(this, playerData.initialSpeed, playerData.targetSpeed, playerData.timeToReachTargetSpeed, (proj, speed) =>
         {
             proj.currentSpeed = speed;
             proj.rb.linearVelocity = proj.direction * speed;
         });
 
-        Tween.Custom(this, col.size, maxColliderScale, timeToReachTargetSpeed, (proj, size) =>
+        Tween.Custom(this, col.radius, playerData.maxColliderScale, playerData.timeToReachTargetSpeed, (proj, radius) =>
         {
-            proj.col.size = size;
+            proj.col.radius = radius;
         });
 
         Lifetime().Forget();
@@ -49,12 +41,12 @@ public class PlayerProjectile : MonoBehaviour
         var token = this.GetCancellationTokenOnDestroy();
 
         await UniTask.WaitUntil(
-            () => Mathf.Abs(currentSpeed - targetSpeed) <= 0.001f,
+            () => Mathf.Abs(currentSpeed - playerData.targetSpeed) <= 0.001f,
             cancellationToken: token,
             cancelImmediately: true);
 
         await UniTask.WaitForSeconds(
-            expirationTimer,
+            playerData.expirationTimer,
             cancellationToken: token,
             cancelImmediately: true);
 
@@ -63,14 +55,17 @@ public class PlayerProjectile : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        //if (collision.TryGetComponent())    
+        if (collision.TryGetComponent(out EnemyHealth health))
+        {
+            health.Damage(playerData.impactDamage, paintResource.paintColor);
+        }    
     }
 
     void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
-        col = GetComponent<BoxCollider2D>();
+        col = GetComponent<CircleCollider2D>();
         paintResource = Player.PaintPool.ActivePaint;
         sr.color = paintResource.color;
     }

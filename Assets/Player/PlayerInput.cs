@@ -144,10 +144,12 @@ public class PlayerInput : MonoBehaviour
         RightMousePressed = rightClickAction.WasPressedThisFrame();
         MiddleMousePressed = middleClickAction.WasPressedThisFrame();
 
-        if (LeftMousePressed) OnLeftClick?.Invoke(MousePosition);
-        if (RightMousePressed) OnRightClick?.Invoke(MousePosition);
-        if (MiddleMousePressed) OnMiddleClick?.Invoke(MousePosition);
+        if (LeftMousePressed) OnLeftClick?.Invoke(MouseWorldPosition);
+        if (RightMousePressed) OnRightClick?.Invoke(MouseWorldPosition);
+        if (MiddleMousePressed) OnMiddleClick?.Invoke(MouseWorldPosition);
     }
+
+    static readonly Plane playPlane = new(Vector3.forward, Vector3.zero);
 
     Vector2 ScreenToWorld(Vector2 screen)
     {
@@ -156,6 +158,10 @@ public class PlayerInput : MonoBehaviour
         if (cam == null)
             return screen;
 
-        return cam.ScreenToWorldPoint(screen);
+        Ray ray = cam.ScreenPointToRay(screen);
+        if (playPlane.Raycast(ray, out float distance))
+            return ray.GetPoint(distance);
+
+        return screen;
     }
 }
