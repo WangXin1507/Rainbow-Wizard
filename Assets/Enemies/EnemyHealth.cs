@@ -28,9 +28,9 @@ public class EnemyHealth : MonoBehaviour
         IsAlive = true;
     }
 
-    public void InitializeHealth(PaintColor color)
+    public void InitializeHealth(PaintColor color, float enemyWeight)
     {
-        float randomHealth = Mathf.Lerp(minMaxHealth, maxMaxHealth, Random.value);
+        float randomHealth = Mathf.Lerp(minMaxHealth, maxMaxHealth, enemyWeight);
         randomHealth = Mathf.Floor(randomHealth);
         MaxHealth = randomHealth;
         if (PaintColorUtil.ContainsRed(color))
