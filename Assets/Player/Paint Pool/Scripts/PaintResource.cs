@@ -19,6 +19,7 @@ namespace PlayerPaint
 
         float reserve;
         float exhaustTimer;
+        float rechargeTimer;
 
         /// <summary>
         /// Modify the paint resource reserve by this amount
@@ -44,11 +45,27 @@ namespace PlayerPaint
             this.exhaustTimeOut = exhaustTimeOut;
 
             reserve = capacity;
+
+            Player.PlayerFire.OnPlayerFiresProjectile.AddListener(RefreshRechargeDelay);
         }
 
         public void OnUpdate(float deltaT)
         {
             exhaustTimer -= deltaT;
+            rechargeTimer -= deltaT;
+
+            if (rechargeTimer < 0)
+            {
+                UpdatePaintReserve(rechargeSpeed * deltaT);
+            }
+        }
+
+        public void RefreshRechargeDelay(GameObject bullet)
+        {
+            if (Player.PaintPool.ActivePaint == this)
+            {
+                rechargeTimer = rechargeDelay;
+            }
         }
     }
 }
