@@ -9,21 +9,19 @@ namespace UI
     public class PaintResourceBar : UIElement
     {
         Scrollbar resourceBar;
-        [HideInInspector]
         public PaintResource resource;
+        public Image handle;
 
         bool exhaustVisualActive;
 
         public override void Awake()
         {
             resourceBar = GetComponent<Scrollbar>();
-            base.Awake();
-        }
-
-        public void Initialize(PaintResource resource)
-        {
-            this.resource = resource;
             resource.OnPaintResourceChange.AddListener(OnPaintResourceUpdate);
+
+            handle.color = resource.color;
+
+            base.Awake();
         }
 
         private void OnDestroy()
@@ -50,9 +48,7 @@ namespace UI
 
             exhaustVisualActive = true;
 
-            var colors = resourceBar.colors;
-            colors.normalColor = Color.white;
-            resourceBar.colors = colors;
+            handle.color = Color.white;
 
             try
             {
@@ -61,9 +57,7 @@ namespace UI
                     cancellationToken: this.GetCancellationTokenOnDestroy(),
                     cancelImmediately: true);
 
-                colors = resourceBar.colors;
-                colors.normalColor = resource.color;
-                resourceBar.colors = colors;
+                handle.color = resource.color;
             }
             finally
             {

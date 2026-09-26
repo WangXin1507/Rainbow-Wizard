@@ -1,27 +1,21 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace PlayerPaint
 {
-    public class PaintResource : MonoBehaviour
+    [CreateAssetMenu(fileName = "PaintResource", menuName = "Scriptable Objects/Paint Resource Data")]
+    public class PaintResource : ScriptableObject
     {
         public UnityEvent<PaintResource, float> OnPaintResourceChange;
         public virtual float Reserve => reserve;
         public virtual bool IsExhausted => exhaustTimer > 0f;
-
-
-        [Tooltip("Max capacity for this resource")]
-        public float capacity = 100f;
-        public float rechargeDelay = 0.4f;
-        public float rechargeSpeed = 15f;
-        [Tooltip("Punishment cooldown for if player exhausts a paint resource")]
-        public float exhaustTimeOut = 1f;
+        public PaintColor paintColor = PaintColor.NONE;
         public Color color;
 
-
+        float capacity;
+        float rechargeDelay;
+        float rechargeSpeed;
+        float exhaustTimeOut;
 
         float reserve;
         float exhaustTimer;
@@ -42,48 +36,19 @@ namespace PlayerPaint
             OnPaintResourceChange?.Invoke(this, reserve);
         }
 
-        void Awake()
+        public void OnAwake(float capacity, float rechargeDelay, float rechargeSpeed, float exhaustTimeOut)
         {
+            this.capacity = capacity;
+            this.rechargeDelay = rechargeDelay;
+            this.rechargeSpeed = rechargeSpeed;
+            this.exhaustTimeOut = exhaustTimeOut;
+
             reserve = capacity;
         }
 
-        void Update()
+        public void OnUpdate(float deltaT)
         {
-            exhaustTimer -= Time.deltaTime;
+            exhaustTimer -= deltaT;
         }
     }
-
-    public class CompositePaintResource : PaintResource
-    {
-        public List<PaintResource> childResources;
-        public int ChildCount => childResources.Count;
-
-        public override float Reserve => childResources.Sum(resource => resource.Reserve);
-        public override bool IsExhausted => childResources.Any(resource => resource.IsExhausted);
-
-        public override void UpdatePaintReserve(float amt)
-        {
-            if (amt > 0)
-            {
-                throw new ArgumentException("Cannot add directly to composite paint resource");
-            }
-
-            foreach (var resource in childResources)
-            {
-                resource.UpdatePaintReserve(amt);
-            }
-        }
-    }
-
-    public class Red : PaintResource { }
-
-    public class Yellow : PaintResource { }
-
-    public class Blue : PaintResource { }
-
-    public class Orange : CompositePaintResource { }
-
-    public class Purple : CompositePaintResource { }
-
-    public class Green : CompositePaintResource { }
 }

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 777af6d91e2bb5f488163515785200de, type: 3}
+  m_Name: Purple
+  m_EditorClassIdentifier: 
+  OnPaintResourceChange:
+    m_PersistentCalls:
+      m_Calls: []
+  paintColor: 6
+  color: {r: 0.5834452, g: 0, b: 0.7924528, a: 0}
+  childResources:
+  - {fileID: 11400000, guid: 37b47e1a53c20764da91b90835583521, type: 2}
+  - {fileID: 11400000, guid: afbbbdfbbdecaf143832bc05f24fa7f3, type: 2}
