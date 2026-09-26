@@ -16,7 +16,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   paintColor: 6
-  color: {r: 0.5834452, g: 0, b: 0.7924528, a: 0}
+  color: {r: 0.5834452, g: 0, b: 0.7924528, a: 1}
   childResources:
   - {fileID: 11400000, guid: 37b47e1a53c20764da91b90835583521, type: 2}
   - {fileID: 11400000, guid: afbbbdfbbdecaf143832bc05f24fa7f3, type: 2}

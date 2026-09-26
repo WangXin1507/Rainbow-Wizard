@@ -16,4 +16,4 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   paintColor: 3
-  color: {r: 0.9716981, g: 0.68924755, b: 0, a: 0}
+  color: {r: 0.9716981, g: 0.68924755, b: 0, a: 1}

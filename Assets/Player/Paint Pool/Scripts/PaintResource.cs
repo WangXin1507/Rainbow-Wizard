@@ -33,7 +33,7 @@ namespace PlayerPaint
                 exhaustTimer = exhaustTimeOut;
             }
 
-            OnPaintResourceChange?.Invoke(this, reserve);
+            OnPaintResourceChange?.Invoke(this, reserve / capacity);
         }
 
         public void OnAwake(float capacity, float rechargeDelay, float rechargeSpeed, float exhaustTimeOut)

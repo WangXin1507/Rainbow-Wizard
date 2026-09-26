@@ -14,14 +14,21 @@ namespace UI
 
         bool exhaustVisualActive;
 
+        const float MINFILL = 0.33f;
+        const float MAXFILL = 1f;
+
         public override void Awake()
         {
             resourceBar = GetComponent<Scrollbar>();
             resource.OnPaintResourceChange.AddListener(OnPaintResourceUpdate);
 
-            handle.color = resource.color;
-
             base.Awake();
+        }
+
+        void Start()
+        {
+            handle.color = resource.color;
+            OnPaintResourceUpdate(resource, resource.Reserve);
         }
 
         private void OnDestroy()
@@ -34,7 +41,7 @@ namespace UI
 
         public void OnPaintResourceUpdate(PaintResource resource, float amount)
         {
-            resourceBar.size = amount;
+            resourceBar.size = Mathf.Lerp(MINFILL, MAXFILL, amount);
 
             if (resource.IsExhausted)
             {

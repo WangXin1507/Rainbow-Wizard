@@ -139,6 +139,7 @@ MonoBehaviour:
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
   resource: {fileID: 0}
+  handle: {fileID: 5140896193668106164}
 --- !u!114 &2953143648007903634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,7 +184,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 713490952757961745}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0
+  m_Size: 0.818
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
