@@ -22,5 +22,19 @@ namespace PlayerPaint
             }
         }
 
+        public override void OnAwake(float capacity, float rechargeDelay, float rechargeSpeed, float exhaustTimeOut)
+        {
+            Player.PlayerFire.OnPlayerFiresProjectile.AddListener(RefreshRechargeDelay);
+        }
+
+        public override void OnUpdate(float deltaT) { }
+
+        public override void RefreshRechargeDelay(PaintResource resource)
+        {
+            foreach (var child in childResources)
+            {
+                child.RefreshRechargeDelay(child);
+            }
+        }
     }
 }
