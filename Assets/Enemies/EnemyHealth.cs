@@ -1,3 +1,4 @@
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
@@ -8,6 +9,7 @@ using UnityEngine.UIElements;
 public class EnemyHealth : MonoBehaviour
 {
     public UnityEvent<float, PaintColor> OnEnemyDamageTaken;
+    public UnityEvent<float, PaintColor> OnEnemyDamageIgnored;
     public UnityEvent<float, PaintColor> OnEnemyDeath;
 
     [SerializeField] private float minMaxHealth = 90f;
@@ -28,9 +30,9 @@ public class EnemyHealth : MonoBehaviour
         IsAlive = true;
     }
 
-    public void InitializeHealth(PaintColor color)
+    public void InitializeHealth(PaintColor color, float enemyWeight)
     {
-        float randomHealth = Mathf.Lerp(minMaxHealth, maxMaxHealth, Random.value);
+        float randomHealth = Mathf.Lerp(minMaxHealth, maxMaxHealth, enemyWeight);
         randomHealth = Mathf.Floor(randomHealth);
         MaxHealth = randomHealth;
         if (PaintColorUtil.ContainsRed(color))
@@ -49,25 +51,41 @@ public class EnemyHealth : MonoBehaviour
 
     public void Damage(float amt, PaintColor color)
     {
-        if (PaintColorUtil.ContainsRed(color))
+        bool damageDealt = false;
+        if (PaintColorUtil.ContainsRed(color) && RedHealth > 0f)
         {
             RedHealth = Mathf.Max(0f, RedHealth - amt);
+            damageDealt = true;
         }
-        if (PaintColorUtil.ContainsBlue(color))
+        if (PaintColorUtil.ContainsBlue(color) && BlueHealth > 0f)
         {
             BlueHealth = Mathf.Max(0f, BlueHealth - amt);
+            damageDealt = true;
         }
-        if (PaintColorUtil.ContainsYellow(color))
+        if (PaintColorUtil.ContainsYellow(color) && YellowHealth > 0f)
         {
             YellowHealth = Mathf.Max(0f, YellowHealth - amt);
+            damageDealt = true;
         }
-        OnEnemyDamageTaken?.Invoke(amt, color);
 
-        if (!HasHealth())
+        if (damageDealt)
         {
-            OnEnemyDeath?.Invoke(amt, color);
-            IsAlive = false;
+            OnEnemyDamageTaken?.Invoke(amt, color);
         }
+        else
+        {
+            OnEnemyDamageIgnored?.Invoke(amt, color);
+        }
+
+        if (!HasHealth()) IsAlive = false;
+    }
+
+    public bool TryDie()
+    {
+        if (HasHealth()) return false;
+        OnEnemyDeath?.Invoke(0f, GetComponent<Enemy>().color);
+        IsAlive = false;
+        return true;
     }
 
     public bool HasHealth()

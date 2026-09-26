@@ -1,3 +1,4 @@
+using System.Data;
 using UnityEngine;
 
 public class PaintColorUtil
@@ -36,6 +37,22 @@ public class PaintColorUtil
             return true;
         }
         return false;
+    }
+
+    public static Color GetPaintColorColor(PaintColor color)
+    {
+        return color switch
+        {
+            PaintColor.NONE => new Color(0f, 0f, 0f, 1f),
+            PaintColor.RED => new Color(1f, 0f, 0f, 1f),
+            PaintColor.ORANGE => new Color(1f, 0.5f, 0f, 1f),
+            PaintColor.YELLOW => new Color(1f, 1f, 0f, 1f),
+            PaintColor.GREEN => new Color(0f, 1f, 0f, 1f),
+            PaintColor.BLUE => new Color(0f, 0f, 1f, 1f),
+            PaintColor.PURPLE => new Color(0.5f, 0f, 1f, 1f),
+            PaintColor.ALL => new Color(1f, 1f, 1f, 1f),
+            _ => new Color(0f, 0f, 0f, 1f),
+        };
     }
 }
 
