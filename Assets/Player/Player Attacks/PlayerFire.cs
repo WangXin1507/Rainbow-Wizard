@@ -1,20 +1,37 @@
+using PlayerPaint;
 using UnityEngine;
 
 public class PlayerFire : MonoBehaviour
 {
-    public GameObject bullet;
+    public PlayerData playerData;
 
+    public GameObject bullet;
     Vector2 playerPos;
+    float lastFiredTime;
 
     void Awake()
     {
         playerPos = transform.position;
     }
 
-    public void SpawnBullet(Vector2 pos)
+    public void SpawnBullet(Vector2 screenPos)
     {
-        Vector2 dir = (pos - playerPos).normalized;
+        if (Player.PaintPool.ActivePaint.IsExhausted)
+        {
+            return;
+        }
 
-        Instantiate(bullet, playerPos, transform.rotation).GetComponent<PlayerProjectile>().Init(dir);
+        if (Time.time - lastFiredTime < playerData.fireInterval)
+        {
+            return;
+        }
+
+        Vector2 dir = (screenPos - playerPos).normalized;
+
+        Instantiate(bullet, playerPos, Quaternion.identity).GetComponent<PlayerProjectile>().Init(dir);
+
+        Player.PaintPool.ActivePaint.UpdatePaintReserve(-playerData.paintCost);
+
+        lastFiredTime = Time.time;
     }
 }

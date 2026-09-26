@@ -8,14 +8,9 @@ namespace PlayerPaint
 {
     public class PaintPool : MonoBehaviour
     {
-        public List<PaintResource> resources;
+        public PlayerData playerData;
 
-        [Tooltip("Max capacity for each resource")]
-        public float capacity = 100f;
-        public float rechargeDelay = 0.4f;
-        public float rechargeSpeed = 15f;
-        [Tooltip("Punishment cooldown for if player exhausts a paint resource")]
-        public float exhaustTimeOut = 1f;
+        public List<PaintResource> resources;
 
         [SerializeField] Canvas resourceUI;
         [SerializeField] List<PaintResourceBar> resourceBars;
@@ -24,7 +19,7 @@ namespace PlayerPaint
 
         [Header("Run time tool")]
         [ShowInInspector, ReadOnly] PaintResource activePaint;
-        public PaintResource ActivePaint { get; private set; }
+        public PaintResource ActivePaint => activePaint;
 
         public void SetActivePaint(PaintResource resource)
         {
@@ -41,7 +36,7 @@ namespace PlayerPaint
         {
             foreach (var resource in resources)
             {
-                resource.OnAwake(capacity, rechargeDelay, rechargeSpeed, exhaustTimeOut);
+                resource.OnAwake(playerData.capacity, playerData.rechargeDelay, playerData.rechargeSpeed, playerData.exhaustTimeOut);
             }
             if (resources.Count > 0)
             {
