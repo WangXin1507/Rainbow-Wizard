@@ -34,4 +34,10 @@ public class EnemySpriteManager : MonoBehaviour
         spriteRenderer.transform.localScale = new Vector3(scaleComponent, scaleComponent, scaleComponent);
         frontSpriteRenderer.transform.localScale = new Vector3(scaleComponent, scaleComponent, scaleComponent);
     }
+
+    public void SetRenderOrder(int order)
+    {
+        spriteRenderer.sortingOrder = order;
+        frontSpriteRenderer.sortingOrder = order;
+    }
 }
