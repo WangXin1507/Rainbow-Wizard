@@ -41,6 +41,7 @@ public class EnemyAttackManager : MonoBehaviour
         //animationManager.TriggerAttackAnim();
         enemy.enemyMovement.StopMoving();
         enemy.animationManager.TriggerAttackAnim();
+        enemy.audioManager.PlayAttackWindup();
     }
 
     public void ExecuteAttack()
@@ -52,6 +53,7 @@ public class EnemyAttackManager : MonoBehaviour
         enemy.colliderManager.DisableCollider();
         enemy.enemyHealth.Damage(99999f, PaintColor.ALL);
         enemy.effectsManager.TriggerBiggestDamageTakenImpactEffect(0f, enemy.color);
+        enemy.audioManager.StopAttackWindup();
         EnemySpawner.Instance.DecrementEnemyCount();
     }
 }

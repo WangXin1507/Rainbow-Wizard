@@ -8,6 +8,7 @@ public class EnemyAudioManager : MonoBehaviour
     [SerializeField] private AudioSource damageTaken;
     [SerializeField] private AudioSource damageIgnored;
     [SerializeField] private AudioSource death;
+    [SerializeField] private AudioSource attackWindup;
 
     private float pitch = 1f;
 
@@ -44,5 +45,16 @@ public class EnemyAudioManager : MonoBehaviour
     {
         death.pitch = pitch;
         death.Play();
+    }
+
+    public void PlayAttackWindup()
+    {
+        attackWindup.pitch = pitch;
+        attackWindup.Play();
+    }
+
+    public void StopAttackWindup()
+    {
+        attackWindup.Stop();
     }
 }
