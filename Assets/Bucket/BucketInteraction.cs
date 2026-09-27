@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 
 namespace Bucket
@@ -65,14 +66,13 @@ namespace Bucket
         async UniTask ApplyLingerDamage(Vector2 origin, float impactDamage, PaintColor color)
         {
             var token = this.GetCancellationTokenOnDestroy();
-            float elapsed = 0f;
-            float dps = impactDamage * data.lingerDamagePerSecondMulti;
+            int iteration = Mathf.FloorToInt(data.lingerDuration / data.lingerDamageFrequency);
+            float dps = impactDamage * data.lingerDamagePerSecondMulti * data.lingerDamageFrequency;
 
-            while (elapsed < data.lingerDuration)
+            for (int i = 0; i < iteration; i ++)
             {
-                DamageEnemiesInRadius(origin, dps * Time.deltaTime, color);
-                elapsed += Time.deltaTime;
-                await UniTask.WaitForSeconds(data.lingerDamageFrequency, cancellationToken: token);
+                DamageEnemiesInRadius(origin, dps, color);
+                await UniTask.Delay(TimeSpan.FromSeconds(data.lingerDamageFrequency), cancellationToken: token);
             }
         }
 
