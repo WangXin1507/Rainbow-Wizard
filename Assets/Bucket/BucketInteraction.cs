@@ -28,6 +28,8 @@ namespace Bucket
         {
             bucket.ToggleBucketVisibility(false);
 
+            GameAudioManager.Instance.PlayBucketPour();
+
             // spawn bucket anim
             pouring = true;
             Vector2 origin = Player.PlayerInput.MouseWorldPosition;

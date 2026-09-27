@@ -9,6 +9,9 @@ namespace PlayerPaint
         public GameObject bullet;
         public Animator animator;
 
+        [SerializeField] private GameObject playerCharacterColor;
+        [SerializeField] private GameObject playerCharacter;
+
         public UnityEvent<PaintResource> OnPlayerFiresProjectile;
 
         Vector2 playerPos;
@@ -26,6 +29,7 @@ namespace PlayerPaint
         {
             if (Player.PaintPool.ActivePaint.IsExhausted)
             {
+                GameAudioManager.Instance.PlayNoAmmoShoot();
                 return;
             }
 
@@ -46,6 +50,7 @@ namespace PlayerPaint
 
             lastFiredTime = Time.time;
             OnPlayerFiresProjectile?.Invoke(Player.PaintPool.ActivePaint);
+            GameAudioManager.Instance.PlayShoot();
         }
 
         public void FlipPlayerDirection(Vector2 dir)
@@ -57,7 +62,8 @@ namespace PlayerPaint
             else
             {
                 facingDir = -facingDir;
-                transform.Rotate(0, 180, 0, Space.Self);
+                playerCharacterColor.transform.Rotate(0, 180, 0, Space.Self);
+                playerCharacter.transform.Rotate(0, 180, 0, Space.Self);
             }
         }
     }

@@ -2,6 +2,7 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -45,8 +46,10 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator PrologueCoroutine()
     {
+        if (currentWave <= 0) yield return new WaitForSeconds(1f);
         messageFrame.ShowMessage("Wave " + (currentWave + 1));
-        yield return new WaitForSeconds(1f);
+        GameAudioManager.Instance.PlayPointEarned();
+        if (currentWave > 0) yield return new WaitForSeconds(1f);
         Player.PlayerHealth.Heal(postWaveHealing);
         RunWave();
         yield return new WaitForSeconds(1.5f);
@@ -78,11 +81,13 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator EpilogueCoroutine()
     {
+        yield return new WaitForSeconds(0.5f);
         messageFrame.ShowMessage("Wave " + currentWave + "\ncomplete!");
+        GameAudioManager.Instance.PlayVictoryHorn();
         yield return new WaitForSeconds(2.5f);
         messageFrame.ShowMessage(SelectRandomMessage());
+        GameAudioManager.Instance.PlayPointEarned();
         yield return new WaitForSeconds(5f);
-        //messageFrame.HideMessage();
         RunWavePrologue();
     }
 

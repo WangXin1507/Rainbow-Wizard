@@ -1,6 +1,7 @@
 using PlayerPaint;
 using PrimeTween;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using UnityEngine;
 
 namespace Bucket
@@ -41,6 +42,8 @@ namespace Bucket
             if (collision.gameObject.TryGetComponent(out PlayerProjectile projectile))
             {
                 currentFill = Mathf.Min(currentFill + data.fillPerShot, data.maxCapacity);
+                GameAudioManager.Instance.PlayBucketHit(Mathf.Lerp(1f, 2f, (currentFill / data.maxCapacity)));
+                if (currentFill >= data.maxCapacity) GameAudioManager.Instance.PlayPointEarned();
 
                 if (paintContent.ContainsKey(projectile.paintResource))
                 {

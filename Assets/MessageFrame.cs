@@ -28,7 +28,7 @@ public class MessageFrame : MonoBehaviour
 
     public void HideMessage()
     {
-        frame.enabled = false;
         text.enabled = false;
+        frame.enabled = false;
     }
 }

@@ -31,6 +31,7 @@ namespace PlayerPaint
             {
                 Debug.Log($"Attempting to use more {this} resource than avaliable. Reserve: {reserve}, attempting to use: {amt}. Activating punishment.");
 
+                GameAudioManager.Instance.PlayNoAmmoShoot();
                 exhaustTimer = exhaustTimeOut;
             }
 
