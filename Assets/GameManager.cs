@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public float waveBudgetOverflowIntrestRate = 100f;
     [SerializeField] public float waveBudgetOverflowAccruedInterest = 0f;
     [SerializeField] public float postWaveHealing = 1000f;
+    [SerializeField] public float points = 0f;
     [SerializeField] public List<EnemySpawnData> enemySpawnPool;
 
     public int currentWave = 0;

@@ -13,6 +13,7 @@ public class GameAudioManager : MonoBehaviour
     [SerializeField] private AudioSource death;
     [SerializeField] private AudioSource bucketHit;
     [SerializeField] private AudioSource bucketPour;
+    [SerializeField] private AudioSource paintSwitch;
 
     private void Awake()
     {
@@ -73,5 +74,11 @@ public class GameAudioManager : MonoBehaviour
     public void PlayBucketPour()
     {
         bucketPour.Play();
+    }
+
+    public void PlayPaintSwitch()
+    {
+        paintSwitch.pitch = Mathf.Lerp(0.9f, 1.1f, Random.value);
+        paintSwitch.PlayOneShot(paintSwitch.clip);
     }
 }

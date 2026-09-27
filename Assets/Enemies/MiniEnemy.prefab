@@ -1119,6 +1119,8 @@ MonoBehaviour:
         m_CallState: 2
   minMaxHealth: 30
   maxMaxHealth: 45
+  pointValue: 4
+  pointDecayDelay: 4
 --- !u!114 &8559186942302713957
 MonoBehaviour:
   m_ObjectHideFlags: 0

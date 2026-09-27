@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Drawing;
 using UnityEngine;
 using UnityEngine.Events;
@@ -14,6 +15,9 @@ public class EnemyHealth : MonoBehaviour
 
     [SerializeField] private float minMaxHealth = 90f;
     [SerializeField] private float maxMaxHealth = 150f;
+
+    [SerializeField] public int pointValue = 10;
+    [SerializeField] public float pointDecayDelay = 4f;
 
     public float RedHealth { get; private set; }
     public float YellowHealth { get; private set; }
@@ -49,6 +53,16 @@ public class EnemyHealth : MonoBehaviour
         if (PaintColorUtil.ContainsBlue(color))
         {
             BlueHealth = randomHealth;
+        }
+        StartCoroutine(ReducePoints());
+    }
+
+    private IEnumerator ReducePoints()
+    {
+        while (IsAlive && pointValue > 1)
+        {
+            yield return new WaitForSeconds(pointDecayDelay);
+            pointValue--;
         }
     }
 
@@ -95,6 +109,7 @@ public class EnemyHealth : MonoBehaviour
         OnEnemyDeath?.Invoke(0f, GetComponent<Enemy>().color);
         IsAlive = false;
         EnemySpawner.Instance.DecrementEnemyCount();
+        GameManager.Instance.points += pointValue;
         return true;
     }
 
