@@ -19,9 +19,19 @@ public class EnemyColliderManager : MonoBehaviour
 
     }
 
-    public void InitializeSpriteManager(PaintColor color, float enemyWeight)
+    public void InitializeColliderManager(float enemyWeight)
     {
         float scaleComponent = Mathf.Lerp(minScale, maxScale, enemyWeight);
         enemyCollider.size.Set(enemyCollider.size.x * scaleComponent, enemyCollider.size.y * scaleComponent);
+    }
+
+    public void EnableCollider()
+    {
+        enemyCollider.enabled = true;
+    }
+
+    public void DisableCollider()
+    {
+        enemyCollider.enabled = false;
     }
 }

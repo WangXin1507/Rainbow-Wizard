@@ -530,6 +530,7 @@ MonoBehaviour:
   spriteColorer: {fileID: 8559186942302713957}
   enemyMovement: {fileID: 4285532487591775838}
   animationManager: {fileID: 343206027188986822}
+  colliderManager: {fileID: 1053676604659474176}
   color: 0
   enemyWeight: -1
   isInitialized: 0
@@ -626,6 +627,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1053676604659474176}
+        m_TargetAssemblyTypeName: EnemyColliderManager, Assembly-CSharp
+        m_MethodName: DisableCollider
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   minMaxHealth: 90
   maxMaxHealth: 150
 --- !u!114 &8559186942302713957
@@ -657,8 +670,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {x: 0, y: 0, z: 0}
-  minMoveSpeed: 0.9
-  maxMoveSpeed: 1.5
+  minMoveSpeed: 1.2
+  maxMoveSpeed: 2
   hitStunSlowMultiplier: 0.7
 --- !u!114 &343206027188986822
 MonoBehaviour:
@@ -687,7 +700,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bea0208e32ed4f4592307322924b4ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyCollider: {fileID: 0}
+  enemyCollider: {fileID: 463737240635990289}
   minScale: 0.9
   maxScale: 1.5
 --- !u!114 &5821926259069841233

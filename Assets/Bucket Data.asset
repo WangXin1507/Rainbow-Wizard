@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Bucket Data
   m_EditorClassIdentifier: 
   maxCapacity: 100
-  fillPerShot: 15
+  fillPerShot: 12.5
   minDamage: 10
-  maxDamage: 100
+  maxDamage: 200
   centerDamageMultiplier: 1
-  edgeDamageMultiplier: 0.4
-  impactRadius: 5
-  lingerDuration: 2
+  edgeDamageMultiplier: 0.5
+  impactRadius: 10
+  lingerDuration: 5
   lingerDamagePerSecondMulti: 0.1
   lingerDamageFrequency: 0.5

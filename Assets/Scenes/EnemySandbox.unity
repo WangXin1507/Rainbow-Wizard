@@ -404,17 +404,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b05f044baebbc94ebf69bbf90232162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minSpawnDelay: 0.5
-  maxSpawnDelay: 3
+  spawnDistance: 45
+  minSpawnDelay: 4
+  maxSpawnDelay: 6
   enemySpawnPool:
   - enemy: {fileID: 6059941950022540815, guid: 086b54974941b5f4db3aaca065b19344, type: 3}
     spawnCost: 10
     groupCount: 1
     groupRadius: 0
   - enemy: {fileID: 6059941950022540815, guid: 086b54974941b5f4db3aaca065b19344, type: 3}
-    spawnCost: 50
-    groupCount: 5
-    groupRadius: 2.5
+    spawnCost: 40
+    groupCount: 4
+    groupRadius: 4
+  currentWave: 1
   waveBudget: 500
   enemyWaveSequence: []
   enemyCount: 0
@@ -793,6 +795,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2785801428829723295, guid: cf8a4b9eaa52f3540a9073d2833294ab, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4794982904257375637, guid: cf8a4b9eaa52f3540a9073d2833294ab, type: 3}
       propertyPath: m_Name
       value: Player
@@ -875,6 +881,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8600983012764706041, guid: cf8a4b9eaa52f3540a9073d2833294ab, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9033614259759975466, guid: cf8a4b9eaa52f3540a9073d2833294ab, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
