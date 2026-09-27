@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using UI;
 using UnityEngine;
@@ -6,7 +7,9 @@ using UnityEngine.SceneManagement;
 public class DeathMenu : UIElement
 {
     public List<GameObject> hideWhenBehold;
+    public List<Star> stars;
     public string menuSceneName;
+    public List<int> starThresholds;
 
     bool beholding;
 
@@ -42,6 +45,16 @@ public class DeathMenu : UIElement
     void OnPlayerDeath(float f)
     {
         Show();
+        float points = GameManager.Instance.points;
+        int c = 0;
+        foreach(var t in starThresholds)
+        {
+            if (points >= t)
+            {
+                c++;
+            }
+        }
+        SpawnStars(c).Forget();
     }
 
     public void Behold()
@@ -61,6 +74,15 @@ public class DeathMenu : UIElement
                     go.SetActive(false);
                 }
             }
+        }
+    }
+
+    public async UniTask SpawnStars(int count)
+    {
+        int spawnCount = Mathf.Min(count, stars.Count);
+        for (int i = 0; i < spawnCount; i++)
+        {
+            await stars[i].Init();
         }
     }
 
