@@ -28,13 +28,6 @@ public class PlayerInput : MonoBehaviour
     public bool AD { get; private set; }
     public bool SD { get; private set; }
     public bool Escape { get; private set; }
-
-    public bool APressed { get; private set; }
-    public bool SPressed { get; private set; }
-    public bool DPressed { get; private set; }
-    public bool ASPressed { get; private set; }
-    public bool ADPressed { get; private set; }
-    public bool SDPressed { get; private set; }
     public bool EscapePressed { get; private set; }
 
     public Vector2 MousePosition { get; private set; }
@@ -114,21 +107,12 @@ public class PlayerInput : MonoBehaviour
         AD = A && D;
         SD = S && D;
 
-        APressed = aAction.WasPressedThisFrame();
-        SPressed = sAction.WasPressedThisFrame();
-        DPressed = dAction.WasPressedThisFrame();
-        EscapePressed = escapeAction.WasPressedThisFrame();
-
-        ASPressed = AS && (APressed || SPressed);
-        ADPressed = AD && (APressed || DPressed);
-        SDPressed = SD && (SPressed || DPressed);
-
-        if (APressed) OnAPressed?.Invoke();
-        if (SPressed) OnSPressed?.Invoke();
-        if (DPressed) OnDPressed?.Invoke();
-        if (ASPressed) OnASPressed?.Invoke();
-        if (ADPressed) OnADPressed?.Invoke();
-        if (SDPressed) OnSDPressed?.Invoke();
+        if (A) OnAPressed?.Invoke();
+        if (S) OnSPressed?.Invoke();
+        if (D) OnDPressed?.Invoke();
+        if (AS) OnASPressed?.Invoke();
+        if (AD) OnADPressed?.Invoke();
+        if (SD) OnSDPressed?.Invoke();
         if (EscapePressed) OnEscapePressed?.Invoke();
 
         MousePosition = pointAction.ReadValue<Vector2>();
