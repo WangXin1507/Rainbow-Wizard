@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
 
     public int currentWave = 0;
 
+    public bool isDead = false;
+
     private void Awake()
     {
         Instance = this;
@@ -42,6 +44,7 @@ public class GameManager : MonoBehaviour
     {
         //Player.PlayerHealth.Heal(postWaveHealing);
         //RunWave();
+        if (isDead) return;
         StartCoroutine(PrologueCoroutine());
     }
 
@@ -59,6 +62,7 @@ public class GameManager : MonoBehaviour
 
     public void RunWave()
     {
+        if (isDead) return;
         currentWave++;
         Debug.Log("Wave " + currentWave);
         float newWaveBudget = 0f;
@@ -77,6 +81,7 @@ public class GameManager : MonoBehaviour
 
     public void RunWaveEpilogue()
     {
+        if (isDead) return;
         StartCoroutine(EpilogueCoroutine());
     }
 

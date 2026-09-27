@@ -37,6 +37,12 @@ public class EnemyHealth : MonoBehaviour
         IsDamaged = false;
     }
 
+    private void Update()
+    {
+        if (!IsAlive) return;
+        if (GameManager.Instance.isDead) Damage(99999f, PaintColor.ALL);
+    }
+
     public void InitializeHealth(PaintColor color, float enemyWeight)
     {
         float randomHealth = Mathf.Lerp(minMaxHealth, maxMaxHealth, enemyWeight);
@@ -109,7 +115,7 @@ public class EnemyHealth : MonoBehaviour
         OnEnemyDeath?.Invoke(0f, GetComponent<Enemy>().color);
         IsAlive = false;
         EnemySpawner.Instance.DecrementEnemyCount();
-        GameManager.Instance.points += pointValue;
+        if (!GameManager.Instance.isDead) GameManager.Instance.points += pointValue;
         return true;
     }
 

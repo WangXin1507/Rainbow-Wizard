@@ -20,6 +20,7 @@ public class PlayerDeathManager : MonoBehaviour
     public void InitiateDeathSequence(GameObject effect)
     {
         //blah blah blah
+        GameManager.Instance.isDead = true;
         damageTakenImpactEffect = effect;
         StartCoroutine(DeathCoroutine());
     }
