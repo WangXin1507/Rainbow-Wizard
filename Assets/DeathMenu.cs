@@ -22,24 +22,26 @@ public class DeathMenu : UIElement
 
     private void Update()
     {
-        if (Input.anyKeyDown)
-        {
-            Debug.Log("test");
-        }
-        if (beholding && Input.anyKeyDown)
-        {
-            UnBehold();
-        }
+        //if (Input.anyKeyDown)
+        //{
+        //    Debug.Log("test");
+        //}
+        //if (beholding && Input.anyKeyDown)
+        //{
+        //    UnBehold();
+        //}
     }
 
     void OnEnable()
     {
         Player.PlayerHealth.OnPlayerDeath.AddListener(OnPlayerDeath);
+        Player.PlayerInput.OnEscapePressed.AddListener(TryUnBehold);
     }
 
     private void OnDisable()
     {
         Player.PlayerHealth.OnPlayerDeath.RemoveListener(OnPlayerDeath);
+        Player.PlayerInput.OnEscapePressed.RemoveListener(TryUnBehold);
     }
 
     void OnPlayerDeath(float f)
@@ -55,6 +57,14 @@ public class DeathMenu : UIElement
             }
         }
         SpawnStars(c).Forget();
+    }
+
+    void TryUnBehold()
+    {
+        if (beholding)
+        {
+            UnBehold();
+        }
     }
 
     public void Behold()

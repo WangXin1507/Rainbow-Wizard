@@ -59,7 +59,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -284,7 +284,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -801,7 +801,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1102,12 +1102,15 @@ MonoBehaviour:
   rectTransform: {fileID: 0}
   canvasGroup: {fileID: 0}
   hideWhenBehold:
-  - {fileID: 3773416856760156141}
+  - {fileID: 2934300261160575024}
   - {fileID: 4458036789991140342}
   - {fileID: 3899124305154003564}
   - {fileID: 6509374083359459109}
+  - {fileID: 5399040969645656454}
+  - {fileID: 4751562799030224514}
   stars: []
   menuSceneName: TitleScreen
+  starThresholds: 64000000d0070000b80b0000a00f000088130000
 --- !u!225 &5463458621095010069
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1613,6 +1616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c90b5a8e0898bae40a22e17daa17b749, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageTakenImpactEffect: {fileID: 0}
   OnPlayerDamageTaken:
     m_PersistentCalls:
       m_Calls:
