@@ -19,7 +19,7 @@ MonoBehaviour:
   targetSpeed: 1
   maxColliderScale: 1.2
   timeToReachTargetSpeed: 7
-  paintCost: 8
+  paintCost: 8.335
   expirationTimer: 2
   capacity: 100
   rechargeDelay: 0.35
