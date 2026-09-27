@@ -21,6 +21,7 @@ public class PlayerDeathManager : MonoBehaviour
     {
         //blah blah blah
         GameManager.Instance.isDead = true;
+        GameAudioManager.Instance.PlayVictoryStupid();
         damageTakenImpactEffect = effect;
         StartCoroutine(DeathCoroutine());
     }
