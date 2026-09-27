@@ -38,6 +38,11 @@ namespace Bucket
 
         void OnTriggerEnter2D(Collider2D collision)
         {
+            if (Player.PlayerHealth.Health <= 0)
+            {
+                return;
+            }
+
             if (!hovered || currentFill == data.maxCapacity)
             {
                 return;
@@ -75,6 +80,11 @@ namespace Bucket
         {
             if (Player.PlayerInput == null)
                 return;
+
+            if (Player.PlayerHealth.Health <= 0)
+            {
+                return;
+            }
 
             bool rightHeld = Player.PlayerInput.RightMouse;
             bool rightPressed = rightHeld && !rightMouseWasHeld;

@@ -23,6 +23,11 @@ namespace PlayerPaint
 
         public void SetActivePaint(PaintResource resource)
         {
+            if (Player.PlayerHealth.Health <= 0)
+            {
+                return;
+            }
+
             if (activePaint == resource)
             {
                 return;

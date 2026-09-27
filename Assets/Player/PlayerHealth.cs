@@ -5,6 +5,7 @@ using UnityEngine.Events;
 /// <summary>
 /// Sub to OnPlayerDamageTaken, OnPlayerDeath. 
 /// </summary>
+[DefaultExecutionOrder(-1)]
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private GameObject damageTakenImpactEffect;

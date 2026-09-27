@@ -27,7 +27,12 @@ namespace PlayerPaint
 
         public void SpawnBullet(Vector2 screenPos)
         {
-            if (Player.PaintPool.ActivePaint.IsExhausted)
+            if (Player.PlayerHealth.Health <= 0)
+            {
+                return;
+            }
+
+            if (Player.PaintPool.ActivePaint && Player.PaintPool.ActivePaint.IsExhausted)
             {
                 GameAudioManager.Instance.PlayNoAmmoShoot();
                 return;
