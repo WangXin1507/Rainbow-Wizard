@@ -14,8 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxCapacity: 100
   fillPerShot: 15
-  centerDamage: 100
-  edgeDamage: 40
-  impactRadius: 20
+  minDamage: 10
+  maxDamage: 100
+  centerDamageMultiplier: 1
+  edgeDamageMultiplier: 0.4
+  impactRadius: 5
   lingerDuration: 2
-  lingerDamagePerSecond: 10
+  lingerDamagePerSecondMulti: 0.1
+  lingerDamageFrequency: 0.5

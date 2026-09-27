@@ -20,4 +20,6 @@ public class BucketData : ScriptableObject
     public float lingerDuration = 2;
     [Tooltip("Percentage of the original impact damage that should be delt over time in the impact area")]
     public float lingerDamagePerSecondMulti = 0.1f;
+    [Tooltip("Only updates how often damage is calculated, does not affect DPS")]
+    public float lingerDamageFrequency = 0.5f;
 }
