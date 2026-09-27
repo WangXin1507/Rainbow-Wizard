@@ -6,7 +6,7 @@ using UnityEngine.Events;
 /// </summary>
 public class PlayerHealth : MonoBehaviour
 {
-    public UnityEvent<float> OnPlayerDamageTaken;
+    public UnityEvent<float, float> OnPlayerDamageTaken; // dmgTaken, updatedHealth
     public UnityEvent<float> OnPlayerDeath;
 
     public float Health {get; private set;}
@@ -19,15 +19,15 @@ public class PlayerHealth : MonoBehaviour
         Health = playerData.health;
     }
 
-    public void Damage(float amt)
+    public void Damage(float dmgTaken)
     {
-        Health = Mathf.Max(0, Health - amt);
+        Health = Mathf.Max(0, Health - dmgTaken);
         
-        OnPlayerDamageTaken?.Invoke(amt);
+        OnPlayerDamageTaken?.Invoke(dmgTaken, Health);
 
         if (Health == 0)
         {
-            OnPlayerDeath?.Invoke(amt);
+            OnPlayerDeath?.Invoke(dmgTaken);
         }
     }
 }
