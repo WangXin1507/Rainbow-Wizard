@@ -47,7 +47,7 @@ namespace Bucket
             }
 
             SetPainPourColor(bucket.MajorityPaint.color);
-            Instantiate(splatExplosion, origin, transform.rotation).GetComponent<SplatExplosion>().Init(0, data.impactRadius, data.lingerDuration * 2, bucket.MajorityPaint.color);
+            Instantiate(splatExplosion, origin, transform.rotation).GetComponent<SplatExplosion>().Init(0, data.impactRadius, data.lingerDuration * 2, bucket.MajorityPaint.color, 0.5f);
 
             var token = this.GetCancellationTokenOnDestroy();
             await UniTask.WaitUntil(

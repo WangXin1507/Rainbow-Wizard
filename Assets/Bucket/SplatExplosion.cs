@@ -8,12 +8,13 @@ public class SplatExplosion : MonoBehaviour
     public SpriteRenderer sp;
     public List<Sprite> splatts;
 
-    public void Init(float startingRadius, float targetRadius, float duration, Color c)
+    public void Init(float startingRadius, float targetRadius, float duration, Color c, float starDelay = 0f)
     {
         sp.sprite = splatts[Random.Range(0, splatts.Count)];
         sp.color = c;
+        sp.transform.localScale = new(startingRadius / 2, startingRadius / 2, startingRadius / 2);
 
-        Tween.Custom(startingRadius, targetRadius, duration: 1f, onValueChange: radius => 
+        Tween.Custom(startingRadius, targetRadius, duration: 1f, startDelay: starDelay ,onValueChange: radius => 
         {
             radius /= 2;
             sp.transform.localScale = new(radius, radius, radius);
