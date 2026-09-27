@@ -35,6 +35,12 @@ public class EnemyAnimationManager : MonoBehaviour
 
     public void TriggerDeathAnim()
     {
+        if (GetComponent<EnemyAttackManager>().isAttacking) return;
         animator.SetTrigger("Dead");
+    }
+
+    public void TriggerAttackAnim()
+    {
+        animator.SetTrigger("Attack");
     }
 }

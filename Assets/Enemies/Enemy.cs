@@ -9,6 +9,9 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyMovement))]
 [RequireComponent(typeof(EnemyAnimationManager))]
 [RequireComponent(typeof(EnemyColliderManager))]
+[RequireComponent(typeof(EnemyUIManager))]
+[RequireComponent(typeof(EnemyEffectsManager))]
+[RequireComponent(typeof(EnemyAttackManager))]
 public class Enemy : MonoBehaviour
 {
     public EnemyHealth enemyHealth;
@@ -16,6 +19,9 @@ public class Enemy : MonoBehaviour
     public EnemyMovement enemyMovement;
     public EnemyAnimationManager animationManager;
     public EnemyColliderManager colliderManager;
+    public EnemyUIManager uiManager;
+    public EnemyEffectsManager effectsManager;
+    public EnemyAttackManager attackManager;
 
     public PaintColor color = PaintColor.NONE;
     public float enemyWeight = -1f;
@@ -29,6 +35,9 @@ public class Enemy : MonoBehaviour
         enemyMovement = GetComponent<EnemyMovement>();
         animationManager = GetComponent<EnemyAnimationManager>();
         colliderManager = GetComponent<EnemyColliderManager>();
+        uiManager = GetComponent<EnemyUIManager>();
+        effectsManager = GetComponent<EnemyEffectsManager>();
+        attackManager = GetComponent<EnemyAttackManager>();
         if (enemyWeight < 0f)
         {
             enemyWeight = Random.value;
@@ -54,5 +63,7 @@ public class Enemy : MonoBehaviour
         enemyMovement.InitializeEnemyMovement(enemyWeight);
         animationManager.InitializeAnimationManager(enemyWeight);
         colliderManager.InitializeColliderManager(enemyWeight);
+        uiManager.InitializeUIManager(color);
+        attackManager.InitializeAttackManager(enemyWeight);
     }
 }

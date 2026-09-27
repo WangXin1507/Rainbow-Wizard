@@ -27,4 +27,10 @@ public class EnemyEffectsManager : MonoBehaviour
         GameObject damageImpact = Instantiate(damageTakenImpactEffect, transform.position, transform.rotation);
         damageImpact.GetComponent<EnemyDamageTakenImpact>().Explode(color, 2f);
     }
+
+    public void TriggerBiggestDamageTakenImpactEffect(float amt, PaintColor color)
+    {
+        GameObject damageImpact = Instantiate(damageTakenImpactEffect, transform.position, transform.rotation);
+        damageImpact.GetComponent<EnemyDamageTakenImpact>().Explode(color, 3f);
+    }
 }

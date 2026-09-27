@@ -1,11 +1,15 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private Vector3 targetPosition;
+    [SerializeField] private float TargetReachRange = 10f;
     [SerializeField] private float minMoveSpeed = 0.9f;
     [SerializeField] private float maxMoveSpeed = 1.5f;
     [SerializeField] private float hitStunSlowMultiplier = 0.5f;
+
+    public UnityEvent TargetReached;
 
     private float minYPosition = 25f;
     private float maxYPosition = -25f;
@@ -50,6 +54,12 @@ public class EnemyMovement : MonoBehaviour
         if (!canMove) return;
         moveDirection = (targetPosition - transform.position).normalized;
         transform.position += moveDirection * MoveSpeed * speedMultiplier * Time.deltaTime;
+
+        // Check for target reached
+        if (Vector3.Distance(transform.position, targetPosition) <= TargetReachRange)
+        {
+            GetComponent<EnemyAttackManager>().StartWindingUp();
+        }
     }
 
     public void TriggerHitStunSlow()

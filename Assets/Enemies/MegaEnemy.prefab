@@ -470,7 +470,7 @@ GameObject:
   - component: {fileID: 3688128735652320493}
   - component: {fileID: 463737240635990289}
   m_Layer: 7
-  m_Name: Enemy
+  m_Name: MegaEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -656,8 +656,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  minMaxHealth: 90
-  maxMaxHealth: 150
+  minMaxHealth: 1200
+  maxMaxHealth: 1700
 --- !u!114 &8559186942302713957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -672,8 +672,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 7911265471156847063}
   frontSpriteRenderer: {fileID: 5309376874368039686}
-  minScale: 0.9
-  maxScale: 1.5
+  minScale: 3
+  maxScale: 4.5
 --- !u!114 &4285532487591775838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -688,8 +688,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPosition: {x: 0, y: 0, z: 0}
   TargetReachRange: 6
-  minMoveSpeed: 1.5
-  maxMoveSpeed: 2.25
+  minMoveSpeed: 0.5
+  maxMoveSpeed: 0.8
   hitStunSlowMultiplier: 0.7
   TargetReached:
     m_PersistentCalls:
@@ -718,8 +718,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35a46b55b01d46542992d954652782da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minAnimSpeed: 0.8
-  maxAnimSpeed: 1.1
+  minAnimSpeed: 0.4
+  maxAnimSpeed: 0.6
   animator: {fileID: 5361909654347971464}
 --- !u!114 &1053676604659474176
 MonoBehaviour:
@@ -734,8 +734,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyCollider: {fileID: 463737240635990289}
-  minScale: 0.9
-  maxScale: 1.5
+  minScale: 3
+  maxScale: 4.5
 --- !u!114 &5821926259069841233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -777,8 +777,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f285d9439b44c4944a42873d23371354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minAttackDamage: 350
-  maxAttackDamage: 600
+  minAttackDamage: 2000
+  maxAttackDamage: 3000
   isWindingUp: 0
   isAttacking: 0
 --- !u!114 &3688128735652320493
@@ -870,8 +870,8 @@ RectTransform:
   m_GameObject: {fileID: 6201527616179679436}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.65, y: 1.65, z: 1.65}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4496052840668015650}
   - {fileID: 8354365532215923280}
@@ -883,7 +883,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 4}
+  m_AnchoredPosition: {x: 0, y: 9.33}
   m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1515549393505660441

@@ -22,12 +22,15 @@ public class EnemyHealth : MonoBehaviour
     public float MaxHealth { get; private set; }
     public bool IsAlive { get; private set; }
 
+    public bool IsDamaged { get; private set; }
+
     private void Awake()
     {
         RedHealth = 0f;
         YellowHealth = 0f;
         BlueHealth = 0f;
         IsAlive = true;
+        IsDamaged = false;
     }
 
     public void InitializeHealth(PaintColor color, float enemyWeight)
@@ -70,6 +73,7 @@ public class EnemyHealth : MonoBehaviour
 
         if (damageDealt)
         {
+            IsDamaged = true;
             OnEnemyDamageTaken?.Invoke(amt, color);
         }
         else
@@ -78,6 +82,7 @@ public class EnemyHealth : MonoBehaviour
         }
 
         if (!HasHealth()) IsAlive = false;
+        if (GetComponent<EnemyAttackManager>().isWindingUp) TryDie();
     }
 
     public bool TryDie()
@@ -85,6 +90,7 @@ public class EnemyHealth : MonoBehaviour
         if (HasHealth()) return false;
         OnEnemyDeath?.Invoke(0f, GetComponent<Enemy>().color);
         IsAlive = false;
+        EnemySpawner.Instance.DecrementEnemyCount();
         return true;
     }
 

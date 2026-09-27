@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxCapacity: 100
   fillPerShot: 12.5
-  minDamage: 10
-  maxDamage: 200
+  minDamage: 40
+  maxDamage: 400
   centerDamageMultiplier: 1
   edgeDamageMultiplier: 0.5
   impactRadius: 10

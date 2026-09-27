@@ -3,26 +3,34 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public static EnemySpawner Instance;
+
     [SerializeField] private float spawnDistance = 25f;
+    [SerializeField] private float spawnMaxYDistance = 12f;
     [SerializeField] private float minSpawnDelay = 1.5f;
     [SerializeField] private float maxSpawnDelay = 4f;
-    [SerializeField] private List<EnemySpawnData> enemySpawnPool;
+    //[SerializeField] private List<EnemySpawnData> enemySpawnPool;
 
 
-    [SerializeField] private int currentWave = 0;
     [SerializeField] private float waveBudget = 100f;
+    [SerializeField] private int enemyCount = 1;
     [SerializeField] private List<EnemySpawnData> enemyWaveSequence;
-    [SerializeField] private float enemyCount = 0f;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        PrepareWaveSequence(waveBudget);
-        StartCoroutine(RunWaveSequence());
+        //PrepareWaveSequence(waveBudget);
+        //RunWaveSequence();
     }
 
     // Update is called once per frame
@@ -31,9 +39,17 @@ public class EnemySpawner : MonoBehaviour
         
     }
 
-    private void PrepareWaveSequence(float newWaveBudget)
+    public void PrepareWaveSequence(float newWaveBudget)
     {
-        currentWave++;
+        if (maxSpawnDelay <= minSpawnDelay)
+        {
+            minSpawnDelay -= GameManager.Instance.waveMaxSpawnDelayReduction;
+        }
+        else
+        {
+            maxSpawnDelay -= GameManager.Instance.waveMaxSpawnDelayReduction;
+        }
+
         waveBudget = newWaveBudget;
         enemyWaveSequence.Clear();
 
@@ -44,20 +60,21 @@ public class EnemySpawner : MonoBehaviour
 
     private bool IncreaseWaveSequence()
     {
-        int enemySpawnIndex = Mathf.FloorToInt(UnityEngine.Random.Range(0f, enemySpawnPool.Count - 0.1f));
-        for (int i = 0; i < enemySpawnPool.Count; i++)
+        int fallThroughDirection = (UnityEngine.Random.value < 0.5f) ? -1 : 1;
+        int enemySpawnIndex = Mathf.FloorToInt(UnityEngine.Random.Range(0f, GameManager.Instance.enemySpawnPool.Count - 0.1f));
+        for (int i = 0; i < GameManager.Instance.enemySpawnPool.Count; i++)
         {
             if (TryAddEnemySpawnToWaveSequence(enemySpawnIndex)) return true;
-            enemySpawnIndex++;
-            if (enemySpawnIndex >= enemySpawnPool.Count) enemySpawnIndex = 0;
+            enemySpawnIndex += fallThroughDirection;
+            if (enemySpawnIndex >= GameManager.Instance.enemySpawnPool.Count) enemySpawnIndex = 0;
         }
         return false;
     }
 
     private bool TryAddEnemySpawnToWaveSequence(int index)
     {
-        EnemySpawnData potentialEnemySpawn = enemySpawnPool[index];
-        if (potentialEnemySpawn.spawnCost <= waveBudget)
+        EnemySpawnData potentialEnemySpawn = GameManager.Instance.enemySpawnPool[index];
+        if (potentialEnemySpawn.spawnCost <= waveBudget && potentialEnemySpawn.firstWave <= GameManager.Instance.currentWave)
         {
             enemyWaveSequence.Add(potentialEnemySpawn);
             waveBudget -= potentialEnemySpawn.spawnCost;
@@ -66,7 +83,12 @@ public class EnemySpawner : MonoBehaviour
         return false;
     }
 
-    private IEnumerator RunWaveSequence()
+    public void RunWaveSequence()
+    {
+        StartCoroutine(WaveSequenceCoroutine());
+    }
+
+    private IEnumerator WaveSequenceCoroutine()
     {
         while (enemyWaveSequence.Count > 0)
         {
@@ -99,17 +121,20 @@ public class EnemySpawner : MonoBehaviour
         if (enemyEnemy.color != PaintColor.NONE) return;
         PaintColor randomColor = GenerateRandomColor();
         enemyEnemy.InitializeEnemy(randomColor);
+        enemyCount++;
     }
 
     private Vector3 GenerateRandomWaveSpawnPoint()
     {
         Vector3 direction = (new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f), 0f)).normalized;
-        return direction * spawnDistance;
+        direction *= spawnDistance;
+        direction.y = Mathf.Clamp(direction.y, -spawnMaxYDistance, spawnMaxYDistance);
+        return direction;
     }
 
     private PaintColor GenerateRandomColor()
     {
-        int randomColor = (currentWave == 1) ? UnityEngine.Random.Range(0, 3) : UnityEngine.Random.Range(0, 6);
+        int randomColor = (GameManager.Instance.currentWave == 1) ? UnityEngine.Random.Range(0, 3) : UnityEngine.Random.Range(0, 6);
         return randomColor switch
         {
             0 => PaintColor.RED,
@@ -121,6 +146,12 @@ public class EnemySpawner : MonoBehaviour
             _ => PaintColor.RED,
         };
     }
+
+    public void DecrementEnemyCount()
+    {
+        enemyCount--;
+        if (enemyCount == 0 && enemyWaveSequence.Count <= 0) GameManager.Instance.RunWaveEpilogue();
+    }
 }
 
 
@@ -130,4 +161,5 @@ public class EnemySpawner : MonoBehaviour
     public float spawnCost;
     public int groupCount;
     public float groupRadius;
+    public float firstWave;
 }

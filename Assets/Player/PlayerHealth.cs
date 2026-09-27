@@ -10,10 +10,12 @@ public class PlayerHealth : MonoBehaviour
     public UnityEvent<float> OnPlayerDeath;
 
     public float Health {get; private set;}
+    public float MaxHealth { get; private set;}
     public PlayerData playerData;
 
     void Awake()
     {
+        MaxHealth = playerData.health;
         Health = playerData.health;
     }
 

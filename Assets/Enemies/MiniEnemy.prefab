@@ -470,7 +470,7 @@ GameObject:
   - component: {fileID: 3688128735652320493}
   - component: {fileID: 463737240635990289}
   m_Layer: 7
-  m_Name: Enemy
+  m_Name: MiniEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -656,8 +656,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  minMaxHealth: 90
-  maxMaxHealth: 150
+  minMaxHealth: 30
+  maxMaxHealth: 45
 --- !u!114 &8559186942302713957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -672,8 +672,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 7911265471156847063}
   frontSpriteRenderer: {fileID: 5309376874368039686}
-  minScale: 0.9
-  maxScale: 1.5
+  minScale: 0.3
+  maxScale: 0.5
 --- !u!114 &4285532487591775838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -688,8 +688,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPosition: {x: 0, y: 0, z: 0}
   TargetReachRange: 6
-  minMoveSpeed: 1.5
-  maxMoveSpeed: 2.25
+  minMoveSpeed: 3
+  maxMoveSpeed: 4
   hitStunSlowMultiplier: 0.7
   TargetReached:
     m_PersistentCalls:
@@ -718,8 +718,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35a46b55b01d46542992d954652782da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minAnimSpeed: 0.8
-  maxAnimSpeed: 1.1
+  minAnimSpeed: 1.5
+  maxAnimSpeed: 2
   animator: {fileID: 5361909654347971464}
 --- !u!114 &1053676604659474176
 MonoBehaviour:
@@ -734,8 +734,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyCollider: {fileID: 463737240635990289}
-  minScale: 0.9
-  maxScale: 1.5
+  minScale: 0.3
+  maxScale: 0.5
 --- !u!114 &5821926259069841233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -777,8 +777,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f285d9439b44c4944a42873d23371354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minAttackDamage: 350
-  maxAttackDamage: 600
+  minAttackDamage: 50
+  maxAttackDamage: 100
   isWindingUp: 0
   isAttacking: 0
 --- !u!114 &3688128735652320493
