@@ -1008,8 +1008,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8516b2ac96699b54a9630459d444e3ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minPitch: 0.85
-  maxPitch: 1
+  minPitch: 0.95
+  maxPitch: 1.1
   damageTaken: {fileID: 7528351974063627999}
   damageIgnored: {fileID: 8553011584208234603}
   death: {fileID: 7667353942077312895}
@@ -1233,7 +1233,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 80
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500

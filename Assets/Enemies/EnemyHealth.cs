@@ -82,7 +82,11 @@ public class EnemyHealth : MonoBehaviour
         }
 
         if (!HasHealth()) IsAlive = false;
-        if (GetComponent<EnemyAttackManager>().isWindingUp) TryDie();
+        if (GetComponent<EnemyAttackManager>().isWindingUp)
+        {
+            if (!IsAlive) GetComponent<EnemyAudioManager>().StopAttackWindup();
+            TryDie();
+        }
     }
 
     public bool TryDie()
