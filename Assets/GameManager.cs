@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator PrologueCoroutine()
     {
-        if (currentWave <= 0) yield return new WaitForSeconds(1f);
+        if (currentWave <= 0) yield return new WaitForSeconds(0.5f);
         messageFrame.ShowMessage("Wave " + (currentWave + 1));
         GameAudioManager.Instance.PlayPointEarned();
         if (currentWave > 0) yield return new WaitForSeconds(1f);
