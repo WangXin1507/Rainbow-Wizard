@@ -1665,6 +1665,7 @@ MonoBehaviour:
     groupRadius: 0
     firstWave: 5
   currentWave: 0
+  isDead: 0
 --- !u!4 &1948761565
 Transform:
   m_ObjectHideFlags: 0
