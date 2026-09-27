@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class DeathMenu : UIElement
 {
+    public List<GameObject> hideOnDeath;
     public List<GameObject> hideWhenBehold;
     public List<Star> stars;
     public string menuSceneName;
@@ -20,17 +21,6 @@ public class DeathMenu : UIElement
         Hide();
     }
 
-    private void Update()
-    {
-        //if (Input.anyKeyDown)
-        //{
-        //    Debug.Log("test");
-        //}
-        //if (beholding && Input.anyKeyDown)
-        //{
-        //    UnBehold();
-        //}
-    }
 
     void OnEnable()
     {
@@ -57,6 +47,14 @@ public class DeathMenu : UIElement
             }
         }
         SpawnStars(c).Forget();
+
+        foreach (var t in hideOnDeath)
+        {
+            if (t != null)
+            {
+                t.SetActive(false);
+            }
+        }
     }
 
     void TryUnBehold()
