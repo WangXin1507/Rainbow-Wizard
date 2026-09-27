@@ -576,6 +576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3030b42ec681a443967e6d2c377ed1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waveMaxSpawnDelayReduction: 0.1
   waveBudgetList:
   - 0
   - 50
@@ -584,6 +585,8 @@ MonoBehaviour:
   - 250
   - 300
   - 350
+  waveBudgetOverflowIntrestRate: 100
+  waveBudgetOverflowAccruedInterest: 0
   enemySpawnPool:
   - enemy: {fileID: 6059941950022540815, guid: 086b54974941b5f4db3aaca065b19344, type: 3}
     spawnCost: 10

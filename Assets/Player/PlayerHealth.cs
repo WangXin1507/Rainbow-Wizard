@@ -30,4 +30,9 @@ public class PlayerHealth : MonoBehaviour
             OnPlayerDeath?.Invoke(amt);
         }
     }
+
+    public void Heal(float amt)
+    {
+        Health = Mathf.Min(MaxHealth, Health + amt);
+    }
 }
