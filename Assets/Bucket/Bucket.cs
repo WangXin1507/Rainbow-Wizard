@@ -2,11 +2,15 @@ using PlayerPaint;
 using PrimeTween;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Bucket
 {
     public class Bucket : MonoBehaviour
     {
+        public UnityEvent<PaintResource, float> OnAddPaintToBucket;
+        public UnityEvent OnBucketEmpty;
+
         public SpriteRenderer bucketPaintVisuals;
         public SpriteRenderer bucketVisuals;
         public BucketData data;
@@ -57,6 +61,8 @@ namespace Bucket
                     majorityPaint.f = paintContent[projectile.paintResource];
                     SetBucketColor(majorityPaint.r);
                 }
+
+                OnAddPaintToBucket?.Invoke(projectile.paintResource, data.fillPerShot);
 
                 Destroy(collision.gameObject);
             }
@@ -177,6 +183,8 @@ namespace Bucket
             paintContent.Clear();
             majorityPaint = new();
             bucketPaintVisuals.color = Color.clear;
+
+            OnBucketEmpty?.Invoke();
         }
     }
 }
