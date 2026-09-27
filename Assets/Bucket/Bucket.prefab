@@ -629,6 +629,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 280cfd6b2ab0fc54aa9e7161715044ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnAddPaintToBucket:
+    m_PersistentCalls:
+      m_Calls: []
   bucketPaintVisuals: {fileID: 2433544745170937775}
   bucketVisuals: {fileID: 7045080144057952767}
   data: {fileID: 11400000, guid: e12270cdb822cc3418e884bc562a2d90, type: 2}
