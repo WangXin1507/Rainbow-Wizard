@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class PlayerHealth : MonoBehaviour
 {
     public UnityEvent<float, float> OnPlayerDamageTaken; // dmgTaken, updatedHealth
+    public UnityEvent<float, float> OnPlayerHealed; // healingReceived, updatedHealth
     public UnityEvent<float> OnPlayerDeath;
 
     public float Health {get; private set;}
@@ -34,5 +35,6 @@ public class PlayerHealth : MonoBehaviour
     public void Heal(float amt)
     {
         Health = Mathf.Min(MaxHealth, Health + amt);
+        OnPlayerHealed?.Invoke(amt, Health);
     }
 }
