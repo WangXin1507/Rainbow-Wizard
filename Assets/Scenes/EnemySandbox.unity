@@ -576,6 +576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3030b42ec681a443967e6d2c377ed1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waveMaxSpawnDelayReduction: 0.1
   waveBudgetList:
   - 0
   - 50
@@ -584,6 +585,9 @@ MonoBehaviour:
   - 250
   - 300
   - 350
+  waveBudgetOverflowIntrestRate: 100
+  waveBudgetOverflowAccruedInterest: 0
+  postWaveHealing: 1000
   enemySpawnPool:
   - enemy: {fileID: 6059941950022540815, guid: 086b54974941b5f4db3aaca065b19344, type: 3}
     spawnCost: 10
@@ -851,6 +855,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1227173590952328779, guid: 339d278605503f7449429224efd2b782, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1867652084561318325, guid: 339d278605503f7449429224efd2b782, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7925353270645472626, guid: 339d278605503f7449429224efd2b782, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

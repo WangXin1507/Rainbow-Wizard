@@ -12,6 +12,7 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyUIManager))]
 [RequireComponent(typeof(EnemyEffectsManager))]
 [RequireComponent(typeof(EnemyAttackManager))]
+[RequireComponent(typeof(EnemyAudioManager))]
 public class Enemy : MonoBehaviour
 {
     public EnemyHealth enemyHealth;
@@ -22,6 +23,7 @@ public class Enemy : MonoBehaviour
     public EnemyUIManager uiManager;
     public EnemyEffectsManager effectsManager;
     public EnemyAttackManager attackManager;
+    public EnemyAudioManager audioManager;
 
     public PaintColor color = PaintColor.NONE;
     public float enemyWeight = -1f;
@@ -38,6 +40,7 @@ public class Enemy : MonoBehaviour
         uiManager = GetComponent<EnemyUIManager>();
         effectsManager = GetComponent<EnemyEffectsManager>();
         attackManager = GetComponent<EnemyAttackManager>();
+        audioManager = GetComponent<EnemyAudioManager>();
         if (enemyWeight < 0f)
         {
             enemyWeight = Random.value;
@@ -65,5 +68,6 @@ public class Enemy : MonoBehaviour
         colliderManager.InitializeColliderManager(enemyWeight);
         uiManager.InitializeUIManager(color);
         attackManager.InitializeAttackManager(enemyWeight);
+        audioManager.InitializeAudioManager(enemyWeight);
     }
 }
