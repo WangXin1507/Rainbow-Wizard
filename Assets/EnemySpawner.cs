@@ -124,7 +124,7 @@ public class EnemySpawner : MonoBehaviour
         enemyCount++;
     }
 
-    private Vector3 GenerateRandomWaveSpawnPoint()
+    public Vector3 GenerateRandomWaveSpawnPoint()
     {
         Vector3 direction = (new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f), 0f)).normalized;
         direction *= spawnDistance;
@@ -132,7 +132,7 @@ public class EnemySpawner : MonoBehaviour
         return direction;
     }
 
-    private PaintColor GenerateRandomColor()
+    public PaintColor GenerateRandomColor()
     {
         int randomColor = (GameManager.Instance.currentWave == 1) ? UnityEngine.Random.Range(0, 3) : UnityEngine.Random.Range(0, 6);
         return randomColor switch

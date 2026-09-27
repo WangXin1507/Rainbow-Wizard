@@ -13,6 +13,7 @@ public class ColorFrame : MonoBehaviour
     {
         Player.PaintPool.OnChangeActivePaint.AddListener(UpdateSplotchColor);
         Player.PlayerHealth.OnPlayerDamageTaken.AddListener(SyncHealthBarVisuals);
+        Player.PlayerHealth.OnPlayerHealed.AddListener(SyncHealthBarVisuals);
         SyncHealthBarVisuals(0, playerData.health);
         spriteRenderer = GetComponent<Image>();
     }
